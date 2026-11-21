@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Formulaire de contact ERDOOR · Ergunbas Group">
+<!-- Ergunbas_client_v22 GitHub Pages: v21 UI + Apps Script bridge -->
+<title>ERDOOR | Ergunbas Group — Kayıt / Inscription</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="https://ergunbas.com/wp-content/themes/ergunbas/assets/image/trademark/favicon.webp">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.8/dist/css/intlTelInput.css">
+<style>
+:root {--red:#e30613;--red-dark:#bc0712;--ink:#111d30;--sub:#607085;--line:#e4eaf1;--bg:#f8fafc;--shadow:0 24px 74px rgba(18,38,63,.08)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-width:320px;min-height:100vh;min-height:100dvh;margin:0;background:var(--bg);color:var(--ink);font:14px Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.topline{height:4px;background:var(--red);flex-shrink:0}
+.header{height:94px;flex-shrink:0;background:#fff;border-bottom:1px solid var(--line)}
+.header-in{max-width:1160px;width:100%;padding:0 28px;margin:auto;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;text-decoration:none;min-width:0}
+.logo-svg{width:164px;height:50px;flex:0 0 auto;display:block}
+.language-switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:11px;background:#f7f9fc}
+.lang-button{height:36px;display:flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:8px;background:transparent;color:#778296;padding:0 10px;font-size:12px;font-weight:800;transition:background .16s,color .16s}
+.lang-button.active{color:var(--ink);box-shadow:inset 0 -3px #364459;background:#fff}
+.lang-button:hover{background:#e9eef4}
+.lang-button:focus-visible{outline:2px solid #364459;outline-offset:2px}
+.flag{width:22px;height:15px;border-radius:2px;box-shadow:0 0 0 1px #cbd5e1;display:inline-block;flex:0 0 auto;overflow:hidden}
+.flag svg{width:100%;height:100%;display:block}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;padding:34px 18px 36px}
+.page{width:100%;max-width:475px;margin:0 auto}
+.form-card{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);padding:38px 38px 34px;position:relative;overflow:visible;width:100%}
+.form-card:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--red);border-radius:17px 17px 0 0}
+.field{margin-bottom:21px}
+.field label{font-size:12px;font-weight:800;color:#2b394c;margin-bottom:9px;display:block}
+.field label .req{color:var(--red)}
+.input,.phone-wrap{height:52px;width:100%;border:1px solid #dce4ed;border-radius:9px;background:#fff;outline:0;transition:border-color .15s,box-shadow .15s}
+.input{padding:0 14px;color:var(--ink);font-size:13px}
+.input::placeholder,.phone-input::placeholder{color:#a4afbd}
+.input:focus,.phone-wrap:focus-within{border-color:#839ab5;box-shadow:0 0 0 3px rgba(110,139,170,.11)}
+.input.invalid,.phone-wrap.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,19,.06)}
+/* International phone country chooser and validation */
+.phone-wrap{position:relative;display:block;isolation:isolate}
+.phone-wrap .iti{width:100%;height:100%;display:block}
+.phone-wrap .iti input.phone-input{width:100%;height:100%;border:0;outline:0;border-radius:9px;background:transparent;color:var(--ink);font-size:14px;letter-spacing:.1px;min-width:0;padding-top:0;padding-bottom:0}
+.phone-wrap .iti__country-container{border-right:1px solid #e5eaf1;border-radius:9px 0 0 9px;background:#f8fafc}
+.phone-wrap .iti__selected-country{height:50px;border-radius:9px 0 0 9px;font-size:12px;font-weight:800;color:var(--ink)}
+.phone-wrap .iti__selected-dial-code{font-size:12px;font-weight:800}
+.phone-wrap .iti__arrow{margin-left:6px}
+.phone-wrap .iti__flag-container{border-radius:9px 0 0 9px}
+.phone-wrap .iti__country-list{z-index:1000}
+.iti__dropdown-content{z-index:1100!important;box-shadow:0 18px 35px rgba(17,29,48,.14)!important;border-color:#dce4ed!important;border-radius:9px!important}
+.iti__search-input{font-size:14px!important}
+.phone-wrap.is-valid{border-color:#169357;box-shadow:0 0 0 3px rgba(22,147,87,.09)}
+.phone-wrap.is-invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,6,19,.06)}
+.phone-status{display:flex;align-items:flex-start;gap:5px;font-size:11px;line-height:1.6;min-height:16px;margin:7px 0 0;color:#7d8a9d}
+.phone-status.valid{color:#12834a;font-weight:700}
+.phone-status.invalid{color:#c32a37}
+.phone-status.loading{color:#7d8a9d}
+.phone-status .status-dot{display:inline-block;flex:none;width:7px;height:7px;margin-top:6px;border-radius:50%;background:#bac7d4}
+.phone-status.valid .status-dot{background:#13945b}
+.phone-status.invalid .status-dot{background:#e30613}
+.phone-status.loading .status-dot{background:#eaa638}
+.hint,.field-error{font-size:10.5px;line-height:1.45;margin-top:7px;color:#93a0b0}
+.phone-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:9px}
+.phone-meta .hint{flex:1;min-width:0}
+.phone-counter{flex-shrink:0;font-size:11px;font-weight:800;color:#63758b;white-space:nowrap;margin-top:7px;font-variant-numeric:tabular-nums}
+.phone-counter.at-limit{color:#af2933}
+.field-error{color:#d5222e;display:none}
+.field-error.visible{display:block}
+.submit{margin-top:6px;background:var(--red);border:0;border-radius:9px;color:#fff;height:53px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:900;box-shadow:0 9px 18px rgba(227,6,19,.15);transition:background .15s,transform .15s}
+.submit:hover{background:var(--red-dark);transform:translateY(-1px)}
+.submit:disabled{opacity:.7;cursor:wait;transform:none}
+.submit svg{width:16px;height:16px}
+.secure{display:flex;align-items:center;justify-content:center;gap:7px;font-size:10px;color:#99a6b6;margin:16px 0 0;text-align:center}
+.secure svg{width:13px;height:13px;flex-shrink:0}
+.error-banner{display:none;background:#fff1f2;color:#b41b2b;border:1px solid #fecdd3;border-radius:8px;padding:11px 13px;font-size:12px;line-height:1.5;margin-bottom:14px}
+.error-banner.visible{display:block}
+.success{text-align:center;display:none;padding:16px 2px 4px}
+.success-icon{display:flex;align-items:center;justify-content:center;width:68px;height:68px;margin:0 auto 23px;border-radius:50%;background:#e8f7ee;color:#108147}
+.success-icon svg{width:34px;height:34px}
+.success h2{margin:0 0 11px;font-size:24px;font-weight:900}
+.success p{color:#6e7f90;line-height:1.7;font-size:13px;margin:0 0 24px}
+/* Successful registration: customer's exact submitted information */
+.registration-summary{text-align:left;margin:2px 0 22px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;overflow:hidden}
+.summary-title{display:flex;align-items:center;gap:9px;padding:14px 16px;border-bottom:1px solid var(--line);font-size:12px;font-weight:900;color:#213047}
+.summary-title svg{width:18px;height:18px;color:var(--red);flex-shrink:0}
+.summary-list{margin:0;padding:0 16px}
+.summary-row{display:grid;grid-template-columns:115px minmax(0,1fr);gap:12px;padding:13px 0;align-items:center}
+.summary-row+.summary-row{border-top:1px solid #e7ecf2}
+.summary-row dt{margin:0;font-size:11px;color:#77869a;font-weight:700}
+.summary-row dd{margin:0;min-width:0;color:#1b293d;font-size:12px;font-weight:800;overflow-wrap:anywhere;word-break:normal;user-select:text}
+.summary-phone-value{font-variant-numeric:tabular-nums}
+.summary-country-flag{margin-right:5px}
+@media(max-width:400px){.summary-row{grid-template-columns:91px minmax(0,1fr);gap:8px}.summary-title{padding:13px 12px}.summary-list{padding:0 12px}}
+.catalog-link{display:flex;align-items:center;justify-content:center;background:var(--red);height:50px;border-radius:9px;color:#fff;text-decoration:none;font-size:13px;font-weight:800}
+.catalog-link:hover{background:var(--red-dark)}
+.reset{border:0;background:none;color:#64748b;font-size:11px;font-weight:800;margin-top:16px;padding:9px}
+.preview-note{display:none;width:100%;margin:16px auto 0;border:1px dashed #fca5a5;padding:11px 13px;border-radius:9px;background:#fff7f7;color:#a21d2b;font-size:11px;line-height:1.6;text-align:center;max-width:475px}
+.is-preview .preview-note{display:block}
+.hp{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+@media(max-width:600px){.header{height:77px}.header-in{padding:0 19px}.logo-svg{width:148px;height:45px}main{padding:26px 18px 29px}.form-card{padding:33px 27px 30px}}
+@media(max-width:400px){.header-in{padding:0 13px}.logo-svg{width:133px;height:41px}.lang-button{height:34px;padding:0 7px;gap:5px}.flag{width:19px;height:13px}main{padding:20px 12px 26px}.form-card{padding:29px 21px 26px}.phone-wrap .iti__selected-country{padding:0 7px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* ERGUNBAS v20 — settings page reference layout */
+.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:0 0 auto}
+.settings-toggle{width:44px;height:44px;border:1px solid #9fb0c4;border-radius:11px;color:#203047;background:#eef3f9;display:grid;place-items:center;transition:background .18s,border-color .18s}
+.settings-toggle:hover,.settings-toggle.active{background:#e7eef7;border-color:#71849f}
+.settings-toggle:focus-visible{outline:2px solid #203047;outline-offset:3px}
+.settings-view{flex:1;width:100%;padding:26px 18px 50px;background:#fff}
+.settings-view[hidden]{display:none!important}
+.settings-layout{max-width:1085px;margin:0 auto}
+.settings-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
+.settings-head h1{font-size:23px;letter-spacing:-.2px;line-height:1.3;font-weight:800;margin:0}
+.settings-back{padding:13px 17px;background:#f8fafc;border:1px solid #e1e7ef;color:#263752;border-radius:10px;font-weight:700;font-size:12px}
+.settings-back:hover{background:#f0f4f8}
+.settings-card{border:1px solid #dfe6ef;border-radius:9px;background:#fff;padding:22px 23px;}
+.settings-card h2{font-size:14px;font-weight:900;margin:0 0 12px;color:#102035}
+.settings-card p{font-size:13px;color:#647995;line-height:1.55;margin:0 0 18px}
+.settings-label{font-size:11px;font-weight:700;color:#3f516a;display:block;margin:0 0 7px}
+.settings-input{display:block;min-width:0;width:100%;height:46px;border:1px solid #d8e1ec;border-radius:5px;background:#fff;padding:0 14px;font-size:13px;color:#0d1c30;outline:none}
+.settings-input:focus{border-color:#819ab6;box-shadow:0 0 0 3px rgba(129,154,182,.14)}
+.settings-row{display:grid;grid-template-columns:1fr;gap:15px;margin-top:16px}
+.settings-actions{display:flex;flex-wrap:wrap;gap:17px;align-items:center;margin-top:17px}
+.settings-save{border:0;border-radius:5px;background:var(--red);color:#fff;font-weight:800;font-size:12px;padding:14px 21px;min-height:44px}
+.settings-save:hover{background:var(--red-dark)}
+.settings-save:disabled{opacity:.6;cursor:wait}
+.settings-link{font-size:12px;color:#344c72;font-weight:700;text-underline-offset:3px}
+.settings-feedback{display:none;margin-top:14px;padding:11px 12px;border-radius:6px;font-size:12px;line-height:1.5}
+.settings-feedback.visible{display:block}
+.settings-feedback.ok{background:#e9f8ee;border:1px solid #afd9bf;color:#176d3c}
+.settings-feedback.error{background:#fff0f1;border:1px solid #f2c3c7;color:#a41d2b}
+.settings-tip{margin-top:16px;font-size:11px;color:#8795a8;line-height:1.6}
+@media(max-width:600px){.header-tools{gap:7px}.settings-toggle{width:40px;height:40px;border-radius:9px}.settings-toggle svg{width:22px;height:22px}.settings-view{padding:22px 14px 45px}.settings-head{margin-bottom:19px}.settings-head h1{font-size:19px}.settings-card{padding:19px 16px}.settings-row{grid-template-columns:1fr;gap:12px}}
+@media(max-width:400px){.header-in{padding:0 10px;gap:7px}.logo-svg{width:116px;height:36px}.header-tools{gap:5px}.language-switch{padding:3px;gap:1px}.lang-button{padding:0 5px;height:32px;gap:3px}.flag{width:17px;height:12px}.settings-toggle{width:36px;height:36px}.settings-head{gap:12px}.settings-back{padding:9px 11px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header class="header"><div class="header-in">
+<a class="brand" href="#" aria-label="Ergunbas Group">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.99 57" class="logo-svg" role="img" aria-label="ERGUNBAS Group">
+        <title>ERGUNBAS Group</title>
+        <g fill="#e52521">
+          <path d="M0,.1l2.93,5.01c.35.58.63,1.08.99,1.67,1.05,1.75,3.03,4.95,3.98,6.72h18.74c3.8,0,10.08-.53,12.68,1.41.27.2.98.9,1.18,1.17.24.32.79,1.11.83,1.52.36-.1.29-.15.46-.52l1.1-1.94c1.85-3.02,2.03-8.02-.02-11.08l-.92-1.15c-.66-.69-1.61-1.24-2.46-1.67-1.83-.92-4.31-1.14-7.03-1.14-5.42,0-10.68-.1-16.18-.1-1.44,0-2.57.1-3.94.1H0Z"/>
+          <path d="M11.04,18.67c.09.37.72,1.3.95,1.7l6.09,10.19c.36.59.68,1.17,1.04,1.7h9.66c1.15,0,1.96.1,3.15.1,4.12,0,6.76-.81,8.65,2.67.22.41.33.77.53,1.14.37-.25,2.03-2.65,2.3-3.19,1.52-2.98,1.55-6,.03-9-.24-.48-.8-1.35-1.13-1.71-.58-.65-.74-.85-1.43-1.41-2.34-1.89-4.99-2.28-9.14-2.28H12.72c-.71,0-.99.1-1.68.1"/>
+          <path d="M30.08,50.74c3.13,0,7.55-.49,9.69,1.63.44.43,1.29,1.74,1.35,2.47.38-.1.5-.35.72-.66,1.57-2.11,2.63-4.22,2.63-7.16,0-3.27-1.31-6.45-3.87-7.99-3.22-1.94-6.26-1.69-10.33-1.69h-8.09c.12.5,5.38,9.17,5.89,10l2,3.39Z"/>
+        </g>
+        <g fill="#171717">
+          <path d="M49.11,17.4v17.31c0,.23.07.29.3.29h13.11c.23,0,.3-.07.3-.29v-3.52c0-.23-.07-.29-.3-.29h-8.58v-3.23h8.38v-3.52h-8.38v-2.93h8.38c.23,0,.3-.07.3-.3v-3.52c0-.23-.07-.29-.3-.29h-12.92c-.23,0-.3.07-.3.29"/>
+          <path d="M66.07,35h4.54c.23,0,.3-.07.3-.3v-4.89h3.15c1.29,0,1.49.95,1.48,1.95v1.76c0,1.89-.86,1.47,4.93,1.47v-4.1c0-1-.38-1.83-.91-2.33-.44-.41-1.53-.98-2.35-1l.22-.08c3.37-1.03,3.04-2.59,3.04-6.08,0-.86-.37-1.87-.73-2.4-1.31-1.91-5.17-1.9-7.65-1.9h-6.02v17.89h0ZM73.77,25.71h-2.86v-4.6c.91,0,3.01-.05,3.74.2.27.09.48.17.64.44.37.61.25,1.65.25,2.48,0,1.04-.72,1.47-1.77,1.47Z"/>
+          <path d="M83.13,24.44c0,3.12-.34,6.49,1.56,8.82,1.84,2.25,4.64,1.94,7.51,1.94,7.47,0,7-4.69,7-9.97h-7.49v3.32h2.76c0,1.14.09,2.35-1.87,2.35-5.01,0-4.64.51-4.64-6.75,0-.85.14-2.13.63-2.51.92-.72,3.97-.56,4.76-.29.62.21,1.01.66,1.03,1.43h4.83c0-1.97-.22-3.34-2.15-4.61-2.18-1.44-4.24-1.25-6.92-1.25-4.96,0-7,2.78-7,7.53"/>
+          <path d="M101.97,29.14c0,2.84,1.1,5.06,3.94,5.77,1.38.35,3.4.29,4.93.29,4.86,0,7.1-1.64,7.1-6.25v-11.83h-4.54c-.47,0-.3.79-.3,1.67,0,1.68.08,9.25-.04,10.03-.37,2.46-1.38,2.09-4.2,2.09-1.48,0-1.89-.81-2.05-1.98l-.02-11.03c0-.42.1-.77-.3-.77h-4.54v12.02h0Z"/>
+          <path d="M121.3,34.71c0,.23.07.29.3.29,5.09,0,4.35.37,4.34-1.37v-11.74l5.22,12.42c.11.28.15.68.5.68h6.71c.23,0,.3-.07.3-.29v-17.31c0-.23-.07-.29-.3-.29h-4.34v13c-.24-.17-.28-.45-.41-.77-.11-.27-.22-.5-.35-.82l-2.1-4.96c-.24-.55-.45-1.11-.69-1.66l-1.41-3.3c-.16-.36-.46-1.49-.86-1.49h-6.9v17.6h0Z"/>
+          <path d="M142.21,17.4v17.31c0,.23.07.29.3.29,2.76,0,9.66.19,11.85-.47,2.87-.88,2.65-3.07,2.65-5.49,0-1.35-.9-2.32-1.94-2.87-.4-.22-.72-.25-1.15-.42-.01,0-.04-.02-.07-.03,1.73,0,2.86-1.36,2.86-3.32s.05-3.8-2.16-4.69c-2.11-.85-9.3-.58-12.04-.58-.23,0-.3.07-.3.29M150.49,24.25h-3.45v-3.13h3.25c1.74,0,1.48.96,1.48,2.15,0,.63-.63.98-1.28.98ZM150.89,30.89h-3.85v-3.23h3.65c1.62,0,1.38,1.24,1.38,2.25,0,.61-.54.98-1.18.98Z"/>
+          <path d="M158.98,35c5.61,0,4.82.43,5.29-1.41.14-.55.39-1.22.43-1.72h5.62l.64,2.49c.07.33.1.64.44.64,5.62,0,5.04.31,4.68-.92l-4.54-16.02c-.11-.37-.15-.95-.53-.95h-6.9c-.38,0-.66,1.43-.84,2.1l-4.49,15.42c-.06.23-.15.37.2.37M167.35,20.92h.4c.01.65,1.05,4.42,1.26,5.4.12.59.38,1.31.42,1.83h-3.85c.2-.42,1.77-6.77,1.77-7.23Z"/>
+          <path d="M177.42,21.7c0,2.95.19,5.15,3.76,5.76,1.43.24,4.48.38,5.57.74.3.1.49.18.6.49.18.58.19,1.76-.17,2.19-.56.65-4.21.56-4.79,0-.29-.28-.42-.88-.42-1.44h-4.64c0,1.88-.14,3.87,1.9,4.95,1.94,1.03,5.2.81,7.66.81,1.67,0,2.8-.36,3.75-1.08,2.02-1.54,1.67-3.75,1.67-6.06s-1.84-3.32-3.84-3.73c-1.59-.32-6.12-.3-6.12-1.46s-.2-1.81.83-2.02c.75-.15,2.62-.18,3.24.04.69.25.67.88.67,1.49h4.64c0-1.82.22-3.4-1.75-4.61-1.69-1.05-4.45-.86-6.53-.86-2.52,0-4.61.29-5.55,2.51-.25.6-.46,1.46-.46,2.28"/>
+          <path d="M138.26,43.21v5.87c0,4.57,3.58,4.3,7.1,4.3,5.53,0,4.93-3.29,4.93-7.23h-5.62v1.47h3.94c0,4.48-.21,4.2-5.72,4.2-2.21,0-2.96-.93-2.96-3.13v-5.08c0-3.73,2.32-3.13,6.02-3.13,2.33,0,2.66,1.1,2.66,2.74h1.68c0-1.38.06-2.69-1.44-3.55-1.64-.94-3.81-.75-5.75-.75-3.04,0-4.83,1.14-4.83,4.3"/>
+          <path d="M154.44,44.29v-1.08h-1.48v9.97h1.48v-4.69c0-3.47.5-4.01,2.76-4.01,1.45,0,1.38,1.21,1.38,2.25h1.58c0-1.82-.31-3.12-1.77-3.53-.87-.24-2.44-.24-3.28.38-.32.23-.42.52-.67.7Z"/>
+          <path d="M161.64,47.32c0,1.23-.06,2.54.21,3.71.76,3.47,6.73,2.35,7.7,1.49.36-.32.62-.9.76-1.4.29-1.04.22-2.74.22-3.9,0-3.31-1.28-4.2-4.44-4.2-1.08,0-2.68.17-3.45.88l-.1.1c-.34.36-.56.81-.68,1.28-.14.58-.22,1.35-.22,2.03M166.96,51.91c-1.03,0-2.61.17-3.19-.45-.69-.76-.46-3.53-.46-4.82,0-.57.14-1.33.41-1.64.56-.65,2.24-.51,3.14-.51s1.54.28,1.81.95c.37.95.33,4.49.03,5.47-.22.73-.84,1.01-1.74,1.01h0Z"/>
+          <path d="M172.98,49.18c0,.96.11,1.99.38,2.65.79,1.95,4.46,1.76,5.72.95.46-.3.5-.55.81-.77v1.17h1.48v-9.97h-1.58v5.97c0,.97-.26,1.76-.9,2.23-.97.71-3.37.74-3.95-.06-.24-.33-.37-1.03-.37-1.59v-6.55h-1.58v5.97Z"/>
+          <path d="M185.9,44.48v-1.27h-1.48v13.79h1.48v-5.08c.56.63.94,1.15,2.01,1.33,1.03.18,2.08.1,2.94-.14,2.08-.55,2.15-2.63,2.15-4.87v-.33c0-2.3-.24-4.08-2.07-4.6-1.08-.31-3.11-.44-4.16.28-.14.1-.38.28-.49.39l-.25.34c-.16.22-.02.04-.13.16M185.9,48.88c0-1.77-.24-4.4,2.57-4.4,3.28,0,2.86.55,2.86,5.28,0,2.31-1.25,2.15-2.86,2.15-1.88,0-2.57-1.29-2.57-3.03Z"/>
+        </g>
+      </svg>
+</a>
+<div class="header-tools"><div class="language-switch" role="group" aria-label="Panel dili / Langue de l'interface">
+<button class="lang-button" data-lang="tr" type="button" onclick="setLang('tr')" aria-pressed="false"><span class="flag"><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="36" height="24" fill="#e30a17"/><circle cx="15" cy="12" r="7" fill="#fff"/><circle cx="17.2" cy="12" r="5.4" fill="#e30a17"/><polygon fill="#fff" points="25,8.85 25.8,10.91 28,11.03 26.28,12.42 26.85,14.55 25,13.35 23.15,14.55 23.72,12.42 22,11.03 24.21,10.91"/></svg></span>TR</button>
+<button class="lang-button" data-lang="fr" type="button" onclick="setLang('fr')" aria-label="Algérie – Français" title="Algérie – Français" aria-pressed="true"><span class="flag"><svg viewBox="0 0 36 24" aria-hidden="true"><rect width="18" height="24" fill="#006233"/><rect x="18" width="18" height="24" fill="#fff"/><path fill="#d21034" fill-rule="evenodd" d="M17.3 4.2a7.8 7.8 0 1 0 0 15.6a7.8 7.8 0 0 0 0-15.6Zm2.8 2.3a6.1 6.1 0 1 1 0 11a6.1 6.1 0 0 1 0-11Z"/><polygon points="22.55,7.85 23.64,10.50 26.50,10.72 24.31,12.57 24.99,15.36 22.55,13.85 20.11,15.36 20.79,12.57 18.60,10.72 21.46,10.50" fill="#d21034"/></svg></span>DZ</button>
+</div>
+<button id="settingsToggle" class="settings-toggle" type="button" aria-label="Paramètres" aria-controls="settingsView" aria-expanded="false" title="Paramètres" onclick="toggleSettings()">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.48 18.54H21M4.68 12H3m1.68 0a2.4 2.4 0 1 0 4.8 0 2.4 2.4 0 0 0-4.8 0ZM10.17 12H21M12.8 5.55H3M21 5.55h-2.52M3 18.54h9.8m5.08.06a2.4 2.4 0 1 0-4.8 0 2.4 2.4 0 0 0 4.8 0Zm0-13.2a2.4 2.4 0 1 0-4.8 0 2.4 2.4 0 0 0 4.8 0Z"/></svg>
+</button></div></div></header>
+<main>
+<div class="page"><section class="form-card" aria-label="ERDOOR kayıt formu / Formulaire d'inscription ERDOOR">
+<div id="formSection"><div class="error-banner" id="errorBanner" role="alert"></div>
+<form id="clientForm" novalidate>
+<div class="field"><label for="fullName"><span data-i18n="nameLabel">Nom et prénom</span> <span class="req">*</span></label><input class="input" id="fullName" name="fullName" type="text" maxlength="100" autocomplete="name" placeholder="Votre nom complet" required><div id="nameError" class="field-error" data-i18n="nameError">Veuillez saisir votre nom et prénom.</div></div>
+<div class="field"><label for="phone"><span data-i18n="phoneLabel">Téléphone / WhatsApp</span> <span class="req">*</span></label>
+<div id="phoneWrap" class="phone-wrap"><input id="phone" name="phone" class="phone-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="" aria-describedby="phoneHint phoneStatus phoneError" required></div>
+<div id="phoneStatus" class="phone-status" role="status" aria-live="polite"><span class="status-dot" aria-hidden="true"></span><span id="phoneStatusText">Sélectionnez le pays de votre numéro WhatsApp.</span></div>
+<div class="phone-meta"><div id="phoneHint" class="hint">Vous pouvez saisir des espaces : ils ne comptent pas dans la limite.</div><output id="phoneDigitCounter" class="phone-counter" for="phone" aria-label="Nombre de chiffres">0 / 9</output></div>
+<div id="phoneError" class="field-error" data-i18n="phoneError">Sélectionnez un pays et saisissez un numéro valide.</div></div>
+<div class="field"><label for="company"><span data-i18n="companyLabel">Entreprise / Société</span> <span class="req">*</span></label><input class="input" type="text" id="company" name="company" maxlength="120" autocomplete="organization" placeholder="Nom de votre entreprise" required><div id="companyError" class="field-error" data-i18n="companyError">Veuillez indiquer le nom de votre entreprise.</div></div>
+<input class="hp" name="website" id="website" type="text" autocomplete="off" tabindex="-1" aria-hidden="true">
+<button type="submit" id="submitButton" class="submit"><span id="submitText" data-i18n="submit">S’inscrire</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+<p class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span data-i18n="secure">Vos informations sont transmises de manière sécurisée.</span></p>
+</form></div>
+<div class="success" id="successSection" aria-live="polite"><div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><h2 id="successTitle" data-i18n="successTitle">Inscription réussie !</h2><p id="successCopy" data-i18n="successCopy">Merci ! Votre demande a été enregistrée. Vous pouvez désormais explorer notre catalogue 2026.</p>
+<section class="registration-summary" id="registrationSummary" aria-labelledby="summaryTitle">
+<div class="summary-title" id="summaryTitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span data-i18n="summaryTitle">Informations de votre inscription</span></div>
+<dl class="summary-list">
+<div class="summary-row"><dt data-i18n="summaryName">Nom et prénom</dt><dd id="summaryName"></dd></div>
+<div class="summary-row"><dt data-i18n="summaryPhone">Téléphone / WhatsApp</dt><dd id="summaryPhone" class="summary-phone-value"></dd></div>
+<div class="summary-row"><dt data-i18n="summaryCompany">Entreprise</dt><dd id="summaryCompany"></dd></div>
+
+</dl></section>
+<a id="catalogLink" class="catalog-link" href="https://heyzine.com/flip-book/3e886f097e.html" target="_blank" rel="noopener noreferrer" data-i18n="catalogButton">Ouvrir le catalogue interactif</a><button class="reset" type="button" onclick="resetForm()" data-i18n="another">Nouvelle inscription</button></div>
+</section>
+<div class="preview-note" id="previewNote"><strong data-i18n="previewTitle">Mode aperçu.</strong> <span data-i18n="previewCopy">Cette version locale permet de vérifier l'interface. L'enregistrement réel s'active une fois le fichier installé dans Google Apps Script.</span></div>
+</div></main>
+<section id="settingsView" class="settings-view" hidden aria-labelledby="settingsTitle">
+ <div class="settings-layout">
+  <div class="settings-head">
+   <h1 id="settingsTitle" data-settings-i18n="title">Paramètres &amp; export</h1>
+   <button type="button" class="settings-back" onclick="toggleSettings(false)" data-settings-i18n="back">← Retour au formulaire</button>
+  </div>
+  <div class="settings-card">
+   <h2 data-settings-i18n="sheetTitle">CONNEXION GOOGLE SHEETS – ALGÉRIE</h2>
+   <p data-settings-i18n="sheetHelp">L’identifiant Google Sheets utilisé pour enregistrer les inscriptions est indiqué ci-dessous. Vous pouvez modifier la destination des inscriptions.</p>
+   <form id="settingsForm" autocomplete="off">
+     <label class="settings-label" for="settingsSheetId" data-settings-i18n="idLabel">ID Google Sheets / URL</label>
+     <input class="settings-input" id="settingsSheetId" name="sheetId" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" value="1X6nuLmrwQU9522MsEjYeWg0g5waMZIiNjS5y48rj9N0" aria-describedby="settingsHelp" required>
+     <div class="settings-row">
+       <div class="settings-gid-field"><label class="settings-label" for="settingsGid" data-settings-i18n="gidLabel">ID de l’onglet (gid)</label><input class="settings-input" id="settingsGid" name="gid" type="text" inputmode="numeric" pattern="[0-9]+" value="1901871133" required></div>
+       
+     </div>
+     <div class="settings-actions">
+       <button type="submit" id="settingsSaveButton" class="settings-save" data-settings-i18n="save">Enregistrer l’ID</button>
+       <a id="settingsOpenSheet" class="settings-link" href="https://docs.google.com/spreadsheets/d/1X6nuLmrwQU9522MsEjYeWg0g5waMZIiNjS5y48rj9N0/edit?gid=1901871133" target="_blank" rel="noopener noreferrer" data-settings-i18n="open">Ouvrir le tableau</a>
+     </div>
+     <div id="settingsFeedback" class="settings-feedback" role="status" aria-live="polite"></div>
+     <div id="settingsHelp" class="settings-tip" data-settings-i18n="tip">Attention : si cette page est publique, tout visiteur peut modifier la destination des inscriptions. Le mode aperçu ne modifie aucune donnée.</div>
+   </form>
+  </div>
+ </div>
+</section>
+
+<script src="config.js"></script>
+<script src="github-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.8/dist/js/intlTelInput.min.js"></script>
+<script>
+'use strict';
+/** ERGUNBAS CLIENT v22 · GitHub Pages + Google Apps Script transport */
+const CATALOG_URL='https://heyzine.com/flip-book/3e886f097e.html';
+const PHONE_UTILS_URL='https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.8/dist/js/utils.js';
+const DICT={
+ fr:{nameLabel:'Nom et prénom',namePlace:'Votre nom complet',nameError:'Veuillez saisir votre nom et prénom.',phoneLabel:'Téléphone / WhatsApp',phoneInvalid:'Sélectionnez un pays et saisissez un numéro valide.',phoneError:'Sélectionnez un pays et saisissez un numéro valide.',selectCountry:'Sélectionnez d’abord le pays du numéro WhatsApp.',enterPhone:'Saisissez votre numéro sans composer l’indicatif international.',phoneValid:'Numéro valide : {number}',phoneIncomplete:'Numéro incomplet ou non conforme au pays sélectionné.',phoneShort:'Numéro trop court pour le pays sélectionné.',phoneLong:'Numéro trop long pour le pays sélectionné.',phoneLoading:'Chargement des règles de validation internationales…',phoneUnavailable:'Validation indisponible. Vérifiez votre connexion internet.',phoneBadCharacters:'Retirez les lettres et les caractères non autorisés du numéro.',phoneAdapted:'Numéro corrigé automatiquement : {number}',phoneNotAdaptable:'Le numéro ne correspond pas aux préfixes attribués ou aux règles de numérotation de ce pays.' ,phoneDzMobile:'En Algérie, le numéro mobile doit commencer par 5, 6 ou 7 après +213 (9 chiffres).',phoneWhatsAppWarning:'Format de numéro incompatible avec WhatsApp : {reason}',phoneWrongCountry:'Le numéro ne correspond pas à l’indicatif du pays sélectionné.',phoneHint:'Les espaces sont autorisés et ne comptent pas. Nettoyage et vérification après saisie.',phoneLimit:'Limite de {max} chiffres atteinte (espaces non comptés).',countrySearch:'Rechercher un pays ou indicatif',companyLabel:'Entreprise / Société',companyPlace:'Nom de votre entreprise',companyError:'Veuillez indiquer le nom de votre entreprise.',submit:'S’inscrire',submitting:'Enregistrement...',secure:'Vos informations sont transmises de manière sécurisée.',successTitle:'Inscription réussie !',successCopy:'Merci ! Votre demande a été enregistrée. Vous pouvez désormais explorer notre catalogue 2026.',demoSuccess:'Mode aperçu : aucune donnée n’a été enregistrée. Le formulaire enregistre les informations dans Google Sheets après son déploiement Google Apps Script.',catalogButton:'Ouvrir le catalogue interactif',another:'Nouvelle inscription',summaryTitle:'Informations de votre inscription',summaryName:'Nom et prénom',summaryPhone:'Téléphone / WhatsApp',summaryCompany:'Entreprise',previewSuccessTitle:'Aperçu de l’inscription',previewTitle:'Mode aperçu.',previewCopy:"Cette version locale permet de vérifier l’interface. L’enregistrement réel s’active une fois le fichier installé dans Google Apps Script.",serverError:'Enregistrement impossible. Réessayez ou contactez notre équipe.'},
+ tr:{nameLabel:'Ad Soyad',namePlace:'Adınız ve soyadınız',nameError:'Lütfen adınızı ve soyadınızı girin.',phoneLabel:'Telefon / WhatsApp',phoneInvalid:'Ülke seçin ve geçerli bir telefon numarası girin.',phoneError:'Ülke seçin ve geçerli bir telefon numarası girin.',selectCountry:'Önce WhatsApp numaranızın ülkesini seçin.',enterPhone:'Ülke kodu otomatik eklenir; numaranızı yazın.',phoneValid:'Geçerli numara: {number}',phoneIncomplete:'Numara seçilen ülkenin kurallarına uygun değil.',phoneShort:'Seçilen ülkeye göre numara çok kısa.',phoneLong:'Seçilen ülkeye göre numara çok uzun.',phoneLoading:'Uluslararası numara kuralları yükleniyor…',phoneUnavailable:'Telefon doğrulaması yüklenemedi. İnternet bağlantınızı kontrol edin.',phoneBadCharacters:'Numaradaki harfleri ve geçersiz işaretleri düzeltin.',phoneAdapted:'Numara otomatik düzeltildi: {number}',phoneNotAdaptable:'Numara seçilen ülkenin tahsis edilmiş telefon aralıklarına veya numaralandırma kurallarına uymuyor.',phoneDzMobile:'Cezayir mobil numarası +213 sonrasında 5, 6 veya 7 ile başlamalı ve 9 rakam içermelidir.',phoneWhatsAppWarning:'WhatsApp numara biçimine uygun değil: {reason}',phoneWrongCountry:'Numara, seçtiğiniz ülkenin telefon koduyla eşleşmiyor.',phoneHint:'Boşluk girebilirsiniz; rakam sınırına dahil değildir. Giriş bitince temizlenir ve doğrulanır.',phoneLimit:'{max} rakam sınırına ulaşıldı. Boşluklar sayılmaz.',countrySearch:'Ülke veya telefon kodu ara',companyLabel:'Firma / Şirket',companyPlace:'Firma adınız',companyError:'Lütfen firma adını girin.',submit:'Kayıt Ol',submitting:'Kaydediliyor...',secure:'Bilgileriniz güvenli şekilde iletilir.',successTitle:'Kaydınız alındı!',successCopy:'Teşekkür ederiz! Bilgileriniz kaydedildi. 2026 dijital kataloğumuzu şimdi inceleyebilirsiniz.',demoSuccess:'Bu bir önizlemedir: hiçbir veri kaydedilmedi. Gerçek kayıt için sayfayı Google Apps Script ile yayınlayın.',catalogButton:'İnteraktif kataloğu aç',another:'Yeni kayıt oluştur',summaryTitle:'Kayıt Bilgileriniz',summaryName:'Ad Soyad',summaryPhone:'Telefon / WhatsApp',summaryCompany:'Firma / Şirket',previewSuccessTitle:'Kayıt Önizlemesi',previewTitle:'Önizleme modu.',previewCopy:'Yerel dosyada tasarım ve form doğrulaması görülebilir. Gerçek kayıt Google Apps Script üzerinden yayınlandığında çalışır.',serverError:'Kayıt yapılamadı. Tekrar deneyin veya ekibimizle iletişime geçin.'}
+};
+// Sayfa her ilk açıldığında DZ (Cezayir / Fransızca) aktif gelir.
+// 'fr' yalnızca çeviri anahtarıdır; kullanıcıya DZ etiketi ve Cezayir bayrağı görünür.
+const DEFAULT_INTERFACE_LANG='fr';
+let lang=DEFAULT_INTERFACE_LANG;
+let phoneApi=null,phoneReady=false,phoneFailed=false,phoneInstanceVersion=0;
+let phoneWasExited=false; // Full validation becomes strict after leaving the phone field.
+let lastRegistration=null; // Registration details visible only after local preview or confirmed server save.
+// Gerçek kaydetme: Apps Script web uygulamasına Index.html olarak dağıtıldığında etkinleşir.
+const preview=!(window.google&&google.script&&google.script.run);
+if(preview)document.body.classList.add('is-preview');
+const $=(id)=>document.getElementById(id);
+const localized=(key,values={})=>(DICT[lang][key]||key).replace(/\{(\w+)\}/g,(_,name)=>values[name]??'');
+// Ad-soyad yazım düzeni: tekrarlanan boşlukları temizler; tireli/kesme işaretli
+// isimleri ve Latin aksanları korur. İsimler değiştirilemez anlamına gelecek
+// tahminler yapılmaz (örn. McDonald gibi istisnalar kullanıcıca düzeltilebilir).
+function formatFullName(value){
+ const source=String(value??'').normalize('NFC')
+   .replace(/[\u0000-\u001F\u007F]/g,' ')
+   .replace(/\s+/gu,' ').trim()
+   .replace(/\s*([-\u2019'])\s*/gu,'$1');
+ // Türkçe arayüzde Türkçe i/ı kuralları uygulanır; başka dillerin
+ // özel harfleri ayrıca korunur. Büyük İ/ı görüldüğünde de Türkçe uygula.
+ const locale=lang==='tr'||/[İı]/u.test(source)?'tr-TR':'fr-FR';
+ return source.toLocaleLowerCase(locale)
+   .replace(/(^|[^\p{L}\p{M}])(\p{L})/gu,(_,separator,initial)=>separator+initial.toLocaleUpperCase(locale))
+   .normalize('NFC');
+}
+function standardizeFullName(){
+ const input=$('fullName');
+ input.value=formatFullName(input.value).slice(0,100);
+ return input.value;
+}
+
+function phoneStatus(mode,message){
+ const el=$('phoneStatus');el.className='phone-status'+(mode?' '+mode:'');$('phoneStatusText').textContent=message;
+ $('phoneWrap').classList.toggle('is-valid',mode==='valid');$('phoneWrap').classList.toggle('is-invalid',mode==='invalid');
+}
+function clearPhoneError(){$('phoneWrap').classList.remove('invalid');$('phoneError').classList.remove('visible');}
+function initPhone(){
+ let oldCountry=null,oldValue='';
+ if(phoneApi){
+   try {oldCountry=phoneApi.getSelectedCountry()?.iso2||null;oldValue=$('phone').value;phoneApi.destroy();}catch(e){}
+ }
+ phoneReady=false;phoneFailed=false;phoneApi=null;const instance=++phoneInstanceVersion;
+ if(typeof window.intlTelInput!=='function'){
+   phoneFailed=true;phoneStatus('invalid',localized('phoneUnavailable'));
+   return;
+ }
+ try{
+  phoneApi=window.intlTelInput($('phone'),{
+   initialCountry:oldCountry||'dz',
+   countryOrder:['dz','tr','ci','ma','fr','be','de','gb','us'],
+   countrySearch:true,
+   separateDialCode:true,
+   showFlags:true,
+   countryNameLocale:lang,
+   uiTranslations:{searchPlaceholder:localized('countrySearch')},
+   strictMode:false,
+   formatAsYouType:false,
+   placeholderNumberPolicy:'AGGRESSIVE',
+   allowedNumberTypes:['MOBILE','FIXED_LINE_OR_MOBILE','FIXED_LINE'],
+   loadUtils:()=>import(PHONE_UTILS_URL)
+  });
+  if(oldValue)$('phone').value=oldValue;
+  lastWithinDigitLimitValue=$('phone').value;updatePhoneCounter();
+  phoneStatus('loading',localized('phoneLoading'));
+  Promise.resolve(phoneApi.promise).then(()=>{
+   if(instance!==phoneInstanceVersion)return;
+   phoneReady=true;
+   updatePhoneCounter();checkPhone(phoneWasExited,false,phoneWasExited);
+  }).catch(()=>{if(instance===phoneInstanceVersion){phoneReady=false;phoneFailed=true;phoneStatus('invalid',localized('phoneUnavailable'));}});
+ }catch(e){phoneFailed=true;phoneStatus('invalid',localized('phoneUnavailable'));}
+}
+// Make all user-entered digit sets safe ASCII digits, while preserving genuine errors.
+// Only separators are stripped: we NEVER remove arbitrary letters or guess missing digits.
+function toAsciiDigits(value){
+ return String(value).replace(/[\u0660-\u0669\u06F0-\u06F9\uFF10-\uFF19]/g,ch=>{
+   const code=ch.charCodeAt(0);
+   return String(code>=0xFF10?code-0xFF10:code>=0x06F0?code-0x06F0:code-0x0660);
+ });
+}
+function sanitizeTypedPhone(raw){
+ const value=toAsciiDigits(raw).replace(/[\s\u200B\u2060\u00A0\u202F\u2007\u2010-\u2015\-().]/g,'');
+ const invalid=/[^0-9+]/.test(value)||value.indexOf('+')>0||(value.match(/\+/g)||[]).length>1;
+ return {value,invalid};
+}
+// Bölgesel yerel hane sınırları. 0 ulusal çevirme öneki olarak yazılırsa
+// ayrıca sayılır (Cezayir: 9 rakam ya da başında 0 ile 10 rakam).
+// Diğer ülkelerde E.164 üst sınırı kullanılır; son doğrulama libphonenumber yapar.
+const NATIONAL_DIGIT_LIMITS={dz:9,tr:10,ci:10,fr:9,ma:9,gb:10,us:10};
+let lastWithinDigitLimitValue='';
+function phoneLimitInfo(raw){
+ const sel=phoneApi?.getSelectedCountry?.()||{iso2:'dz',dialCode:'213'};
+ const iso=String(sel.iso2||'dz').toLowerCase();
+ const dial=String(sel.dialCode||'213');
+ const digitText=toAsciiDigits(raw).replace(/\D/g,'');
+ const prefix=toAsciiDigits(raw).trimStart();
+ const national=NATIONAL_DIGIT_LIMITS[iso]??Math.max(5,15-dial.length);
+ let max=national;
+ if(prefix.startsWith('+')){
+   max=digitText.startsWith(dial)?dial.length+national:15;
+ }else if(digitText.startsWith('00')){
+   max=digitText.startsWith('00'+dial)?2+dial.length+national:17;
+ }else if(digitText.startsWith(dial)){
+   // Önceden + yazılmadan kopyalanmış ülke kodunu da destekle.
+   max=dial.length+national;
+ }else if(digitText.startsWith('0')&&iso!=='ci'&&iso!=='us'){
+   max=national+1;
+ }
+ return {digits:digitText.length,max};
+}
+function updatePhoneCounter(){
+ const {digits,max}=phoneLimitInfo($('phone').value);
+ const out=$('phoneDigitCounter');
+ out.textContent=digits+' / '+max;
+ out.classList.toggle('at-limit',digits>=max&&digits>0);
+}
+function showPhoneLimit(){
+ const {max}=phoneLimitInfo($('phone').value||lastWithinDigitLimitValue);
+ const message=localized('phoneLimit',{max});
+ phoneStatus('invalid',message);
+ $('phoneError').textContent=message;
+ $('phoneError').classList.add('visible');
+ $('phoneWrap').classList.add('invalid');
+ $('phone').setAttribute('aria-invalid','true');
+ updatePhoneCounter();
+}
+function applyPhoneInputLimit(){
+ const input=$('phone');
+ // Kullanıcının boşluklarını ve imleç yerini yazarken aynen koru.
+ // Yalnızca farklı alfabelerdeki rakamları ASCII rakama çevir.
+ const raw=input.value;
+ const normalized=toAsciiDigits(raw);
+ if(normalized!==raw){
+   const caret=input.selectionStart;
+   input.value=normalized;
+   if(caret!=null)try{input.setSelectionRange(caret,caret);}catch(e){}
+ }
+ if(phoneLimitInfo(input.value).digits>phoneLimitInfo(input.value).max){
+   // Fazla rakamları KESİP yanlış numara kaydetme: girişin tamamını reddet.
+   input.value=lastWithinDigitLimitValue;
+   showPhoneLimit();
+   return false;
+ }
+ lastWithinDigitLimitValue=input.value;
+ updatePhoneCounter();
+ return true;
+}
+function cleanSeparatorsAfterEntry(){
+ const input=$('phone');
+ input.value=sanitizeTypedPhone(input.value).value;
+ lastWithinDigitLimitValue=input.value;
+ updatePhoneCounter();
+}
+// WhatsApp iletişim formunda mobil veya mobil/sabit ayırt edilemeyen hatları kabul et.
+// Sadece uzunluk kontrolü yapan isValidNumber() KULLANILMAZ.
+const VALID_PHONE_TYPES=['MOBILE','FIXED_LINE_OR_MOBILE'];
+function getDzNationalDigits(value){
+ let raw=String(value||'');
+ if(raw.startsWith('+213'))raw=raw.slice(4);
+ else if(raw.startsWith('00213'))raw=raw.slice(5);
+ else if(raw.startsWith('+')||raw.startsWith('00'))return null;
+ else if(raw.startsWith('213')&&raw.length>9)raw=raw.slice(3);
+ if(raw.startsWith('0'))raw=raw.slice(1);
+ return /^\d+$/.test(raw)?raw:null;
+}
+let phoneNormalizing=false;
+function inspectPhone(){
+ if(phoneFailed||!phoneReady||!phoneApi||!window.intlTelInput?.utils)return {ok:false,error:'phoneUnavailable'};
+ const selected=phoneApi.getSelectedCountry();
+ if(!selected?.iso2)return {ok:false,error:'selectCountry'};
+ const cleaned=sanitizeTypedPhone($('phone').value);
+ if(cleaned.invalid)return {ok:false,error:'phoneBadCharacters'};
+ if(!/\d/.test(cleaned.value))return {ok:false,error:'enterPhone'};
+ const utils=window.intlTelInput.utils;
+ // Kesinlikle yalnız uzunluğu doğrulayan isValidNumber() sonucuna güvenme.
+ if(typeof utils.isValidNumberPrecise!=='function')return {ok:false,error:'phoneUnavailable'};
+ const iso=String(selected.iso2).toLowerCase();
+ const dial=String(selected.dialCode||'');
+ // Cezayir mobil formatı: uluslararası +213 + (5, 6 veya 7 ile başlayan 9 rakam).
+ // '111111111' gibi uzunluğu doğru olan ama tahsisli mobil aralıkta olmayan numaralar RED.
+ if(iso==='dz'){
+   const national=getDzNationalDigits(cleaned.value);
+   if(national!==null && national.length===9&&!/^[567]\d{8}$/.test(national))
+     return {ok:false,error:'phoneDzMobile'};
+ }
+ let candidates=[];
+ let wrongCountry=false;
+ if(cleaned.value.startsWith('+'))candidates=[cleaned.value];
+ else if(cleaned.value.startsWith('00'))candidates=['+'+cleaned.value.slice(2)];
+ else {
+   candidates=[cleaned.value];
+   if(dial&&cleaned.value.startsWith(dial))candidates.push('+'+cleaned.value);
+ }
+ for(const candidate of candidates){
+   try{
+     if(candidate.startsWith('+')&&!candidate.startsWith('+'+dial)){
+       wrongCountry=true;continue;
+     }
+     // Prefix/operatör tahsisi dahil, ülkeye özgü AYRINTILI kontrol.
+     if(!utils.isValidNumberPrecise(candidate,iso,VALID_PHONE_TYPES))continue;
+     const e164=utils.formatNumber(candidate,iso,'E164');
+     if(!/^\+[1-9]\d{7,14}$/.test(e164))continue;
+     if(!e164.startsWith('+'+dial)){wrongCountry=true;continue;}
+     const core=utils.getCoreNumber(e164,iso);
+     if(!/^\d+$/.test(core))continue;
+     if(iso==='dz'&&!/^[567]\d{8}$/.test(core))continue;
+     // Bazı ülkelerde mobil ve sabit hat tek aralıkta; orada ikisini ayıramayız.
+     // Bilinen sabit hat, özel servis, ücretli/ücretsiz hatlar bu formda reddedilir.
+     if(typeof utils.getNumberType==='function'){
+       const type=utils.getNumberType(candidate,iso);
+       if(type!==null&&type!==undefined&&!VALID_PHONE_TYPES.includes(type))continue;
+     }
+     return {ok:true,e164,core,selected,original:cleaned.value};
+   }catch(e){}
+ }
+ let error=wrongCountry?'phoneWrongCountry':'phoneNotAdaptable';
+ if(!wrongCountry&&iso==='dz'){
+   const national=getDzNationalDigits(cleaned.value);
+   if(national!==null&&national.length===9&&!/^[567]\d{8}$/.test(national))error='phoneDzMobile';
+ }
+ try{
+   const code=utils.getValidationError(candidates[0],iso);
+   if(!wrongCountry&&error!=='phoneDzMobile'){
+     if(code==='TOO_SHORT')error='phoneShort';
+     else if(code==='TOO_LONG')error='phoneLong';
+   }
+ }catch(e){}
+ return {ok:false,error};
+}
+function showPhoneError(key,aggressive,fromExit=false){
+ const reason=localized(key);
+ // Only the phone format can be verified in-browser. A live WhatsApp account
+ // cannot be identified without an authorized WhatsApp verification service.
+ const message=fromExit && key!=='phoneUnavailable' && key!=='phoneLoading'
+   ?localized('phoneWhatsAppWarning',{reason}) : reason;
+ phoneStatus(aggressive?'invalid':'',message);
+ if(aggressive){
+   $('phoneWrap').classList.add('invalid');
+   $('phoneError').classList.add('visible');
+   $('phoneError').textContent=message;
+   $('phone').setAttribute('aria-invalid','true');
+ }
+}
+function checkPhone(aggressive=false,finalize=false,fromExit=false){
+ clearPhoneError();$('phone').removeAttribute('aria-invalid');
+ if(phoneFailed){showPhoneError('phoneUnavailable',aggressive,fromExit);return null;}
+ if(!phoneReady||!phoneApi){phoneStatus('loading',localized('phoneLoading'));return null;}
+ let result=inspectPhone();
+ if(!result.ok){showPhoneError(result.error,aggressive,fromExit);return null;}
+ if(finalize){
+   phoneNormalizing=true;
+   // setNumber also sets the country if the customer pasted an explicit international number.
+   // Then keep only the national significant digits in the input (no spaces or punctuation).
+   try{
+     phoneApi.setNumber(result.e164);
+     const current=phoneApi.getSelectedCountry();
+     const countryCode=current?.iso2||result.selected.iso2;
+     const core=window.intlTelInput.utils.getCoreNumber(result.e164,countryCode);
+     if(!/^\d+$/.test(core))throw new Error('No valid national number');
+     $('phone').value=core;
+     lastWithinDigitLimitValue=core;updatePhoneCounter();
+     // Revalidate after display normalization to avoid accepting a number that changed meaning.
+     const confirmed=inspectPhone();
+     if(!confirmed.ok||confirmed.e164!==result.e164)throw new Error('Normalization failed');
+     result=confirmed;
+   }catch(e){showPhoneError('phoneNotAdaptable',true,fromExit);return null;}
+   finally {phoneNormalizing=false;}
+   phoneStatus('valid',localized('phoneAdapted',{number:result.e164}));
+ }else{
+   phoneStatus('valid',localized('phoneValid',{number:result.e164}));
+ }
+ return {phone:result.e164,region:phoneApi.getSelectedCountry()?.iso2||result.selected.iso2,dial:phoneApi.getSelectedCountry()?.dialCode||result.selected.dialCode};
+}
+function setLang(l){
+ lang=l==='tr'?'tr':'fr';document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(DICT[lang][key])el.textContent=DICT[lang][key];});
+ document.querySelectorAll('.lang-button').forEach(b=>{const active=b.dataset.lang===lang;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ $('fullName').placeholder=localized('namePlace');$('company').placeholder=localized('companyPlace');$('phoneHint').textContent=localized('phoneHint');
+ if(lastRegistration)renderRegistrationSummary();
+ translateSettings();
+ initPhone();
+}
+$('phone').addEventListener('beforeinput',e=>{
+ if(!e.inputType?.startsWith('insert')||e.isComposing||e.data==null)return;
+ const input=$('phone'),start=input.selectionStart??input.value.length,end=input.selectionEnd??start;
+ const proposed=input.value.slice(0,start)+e.data+input.value.slice(end);
+ if(phoneLimitInfo(proposed).digits>phoneLimitInfo(proposed).max){e.preventDefault();showPhoneLimit();}
+});
+$('phone').addEventListener('input',()=>{
+  // New edits are rechecked immediately but do not show a blocking red error
+  // until the field is left or the user submits the form.
+  if(applyPhoneInputLimit())checkPhone(false);
+});
+function validatePhoneOnExit(){
+  phoneWasExited=true;
+  cleanSeparatorsAfterEntry();
+  // Revalidate the FULL number, including selected country, national prefix,
+  // phone type, and E.164 representation. Empty values also trigger a warning.
+  return checkPhone(true,true,true);
+}
+$('phone').addEventListener('blur',validatePhoneOnExit);
+$('phone').addEventListener('countrychange',()=>{
+  if(phoneNormalizing)return;
+  updatePhoneCounter();
+  if(phoneWasExited && $('phone').value.trim())validatePhoneOnExit();
+  else checkPhone(false);
+});
+['fullName','company'].forEach(id=>$(id).addEventListener('input',()=>{$(id).classList.remove('invalid');$(id==='fullName'?'nameError':'companyError').classList.remove('visible');}));
+$('fullName').addEventListener('blur', standardizeFullName);
+function validate(){
+ let ok=true;
+ const name=standardizeFullName(),company=$('company').value.trim().replace(/\s+/g,' ');
+ function invalid(id,err){$(id).classList.add('invalid');$(err).classList.add('visible');ok=false;}
+ if(name.length<3)invalid('fullName','nameError');
+ if(company.length<2)invalid('company','companyError');
+ const phone=validatePhoneOnExit();if(!phone)ok=false;
+ return ok?{fullName:name,phone:phone.phone,company,region:phone.region,language:lang,website:$('website').value}:null;
+}
+function busy(v){$('submitButton').disabled=v;$('submitText').textContent=localized(v?'submitting':'submit');}
+function failure(err){busy(false);$('errorBanner').textContent=err&&err.message?err.message:localized('serverError');$('errorBanner').classList.add('visible');}
+function renderRegistrationSummary(){
+ if(!lastRegistration)return;
+ const {fullName,phone,company}=lastRegistration.data;
+ // User-supplied values are set as text, never HTML, to avoid script injection.
+ $('summaryName').textContent=fullName||'';
+ $('summaryPhone').textContent=phone||'';
+ $('summaryCompany').textContent=company||'';
+ $('successTitle').textContent=lastRegistration.saved?localized('successTitle'):localized('previewSuccessTitle');
+ $('successCopy').textContent=lastRegistration.saved?localized('successCopy'):localized('demoSuccess');
+}
+function success(data,serverResponse=null){
+ // The server response is preferred, since it represents what was saved to Sheets.
+ // Older deployed Code.gs versions return only {ok:true}: use the submitted data then.
+ const saved=!!(serverResponse&&serverResponse.ok);
+ const confirmed=(serverResponse&&serverResponse.saved)||{};
+ lastRegistration={saved,data:{
+   fullName:String(confirmed.fullName||data.fullName||''),
+   phone:String(confirmed.phone||data.phone||''),
+   company:String(confirmed.company||data.company||''),
+   region:String(confirmed.region||data.region||'').toLowerCase()
+ }};
+ busy(false);$('formSection').style.display='none';$('successSection').style.display='block';$('catalogLink').href=CATALOG_URL;
+ renderRegistrationSummary();
+ $('successTitle').setAttribute('tabindex','-1');$('successTitle').focus({preventScroll:true});
+}
+function resetForm(){
+ $('clientForm').reset();$('successSection').style.display='none';$('formSection').style.display='block';$('errorBanner').classList.remove('visible');
+ lastRegistration=null;['summaryName','summaryPhone','summaryCompany'].forEach(id=>$(id).textContent='');
+ document.querySelectorAll('.invalid').forEach(x=>x.classList.remove('invalid'));document.querySelectorAll('.field-error').forEach(x=>x.classList.remove('visible'));
+ phoneWasExited=false;if(phoneApi)phoneApi.setCountry('dz');$('phone').value='';lastWithinDigitLimitValue='';updatePhoneCounter();checkPhone(false);
+}
+$('clientForm').addEventListener('submit',e=>{
+ e.preventDefault();$('errorBanner').classList.remove('visible');
+ const data=validate();if(!data)return;
+ busy(true);
+ if(preview){success(data);return;}
+ try{google.script.run.withSuccessHandler(res=>{if(res&&res.ok)success(data,res);else failure({message:(res&&res.error)||localized('serverError')});}).withFailureHandler(failure).submitLead(data);}
+ catch(err){failure(err);}
+});
+
+/* Settings area: password-free configuration. The page owner must limit access if destination changes should be restricted. */
+const SETTINGS_TEXT={
+ tr:{title:'Ayarlar & Dışa Aktar',back:'← Kayıt formuna dön',sheetTitle:'CEZAYİR GOOGLE E-TABLO BAĞLANTISI',sheetHelp:'Şu an bağlı olan Google E-Tablo ID kodu aşağıdadır. İleride yeni bir tablo açarsanız ID kodunu buradan değiştirebilirsiniz:',idLabel:'Google E-Tablo ID / Bağlantı',gidLabel:'Sekme ID (gid)',save:'ID Kodunu Kaydet',open:'Google E-Tabloyu aç',tip:'Uyarı: Bu form herkese açıksa sayfaya erişen herkes Google Sheets hedefini değiştirebilir. Önizlemede hiçbir veri değiştirilmez.',preview:'Önizleme modunda gerçek bağlantı ayarı değiştirilemez. Apps Script üzerinden yayınlayın.',missing:'Geçerli Google Sheets ID ve sekme gid girin.',saving:'Bağlantı kontrol ediliyor ve kaydediliyor...',saved:'Google Sheets bağlantısı güncellendi. Yeni kayıtlar belirtilen tabloya yönlendirilecek.',readFail:'Bağlantı bilgileri alınamadı. Tekrar deneyin.',authFail:'Bağlantı değiştirilemedi: '},
+ fr:{title:'Paramètres & export',back:'← Retour au formulaire',sheetTitle:'CONNEXION GOOGLE SHEETS – ALGÉRIE',sheetHelp:'L’identifiant du tableau Google Sheets actuel est indiqué ci-dessous. Vous pouvez changer la destination des inscriptions.',idLabel:'ID Google Sheets / URL',gidLabel:'ID de l’onglet (gid)',save:'Enregistrer l’ID',open:'Ouvrir le tableau',tip:'Attention : si ce formulaire est public, tous les visiteurs peuvent modifier la destination Google Sheets. Aucun paramètre n’est modifié en mode aperçu.',preview:'Impossible de modifier la connexion en mode aperçu. Publiez via Google Apps Script.',missing:'Saisissez un identifiant Google Sheets et un gid valides.',saving:'Vérification et enregistrement de la connexion...',saved:'Connexion Google Sheets mise à jour. Les futures inscriptions seront enregistrées dans le nouveau tableau.',readFail:'Impossible de récupérer la connexion. Réessayez.',authFail:'Modification impossible : '}
+};
+const DEFAULT_SHEET_ID='1X6nuLmrwQU9522MsEjYeWg0g5waMZIiNjS5y48rj9N0';
+const DEFAULT_SHEET_GID=1901871133;
+function settingsText(key){return (SETTINGS_TEXT[lang]||SETTINGS_TEXT.fr)[key]||key;}
+function translateSettings(){
+ document.querySelectorAll('[data-settings-i18n]').forEach(el=>{const t=settingsText(el.dataset.settingsI18n); if(t)el.textContent=t;});
+ const toggle=$('settingsToggle');const name=lang==='tr'?'Ayarlar':'Paramètres';toggle.title=name;toggle.setAttribute('aria-label',name);
+}
+function setSettingsFeedback(message,okay){
+ const el=$('settingsFeedback');el.textContent=message;el.className='settings-feedback'+(message?' visible '+(okay?'ok':'error'):'');
+}
+function currentSheetFields(){
+ const id=$('settingsSheetId').value.trim(),gid=$('settingsGid').value.trim();
+ if(/^[\w-]{25,100}$/.test(id) && /^\d+$/.test(gid)){
+   $('settingsOpenSheet').href='https://docs.google.com/spreadsheets/d/'+encodeURIComponent(id)+'/edit?gid='+encodeURIComponent(gid);
+ }
+}
+function normalizeSheetInput(){
+ const input=$('settingsSheetId');const text=input.value.trim();
+ const urlId=text.match(/\/spreadsheets\/d\/([A-Za-z0-9_-]+)/);
+ if(urlId){input.value=urlId[1];const gid=text.match(/(?:\?|&|#)gid=(\d+)/);if(gid)$('settingsGid').value=gid[1];}
+ currentSheetFields();
+}
+function loadSheetSettings(){
+ if(preview){$('settingsSheetId').value=DEFAULT_SHEET_ID;$('settingsGid').value=String(DEFAULT_SHEET_GID);currentSheetFields();return;}
+ google.script.run.withSuccessHandler(r=>{
+   if(!r||!r.ok){setSettingsFeedback(settingsText('readFail'),false);return;}
+   $('settingsSheetId').value=r.spreadsheetId||DEFAULT_SHEET_ID;
+   $('settingsGid').value=String(r.gid??DEFAULT_SHEET_GID);
+   currentSheetFields();
+ }).withFailureHandler(err=>setSettingsFeedback(settingsText('readFail'),false)).getSpreadsheetSettings();
+}
+function toggleSettings(force){
+ const isOpen=typeof force==='boolean'?force:$('settingsView').hidden;
+ $('settingsView').hidden=!isOpen;
+ document.querySelector('main').style.display=isOpen?'none':'';
+ $('settingsToggle').classList.toggle('active',isOpen);
+ $('settingsToggle').setAttribute('aria-expanded',String(isOpen));
+ if(isOpen){setSettingsFeedback('',false);loadSheetSettings();$('settingsTitle').setAttribute('tabindex','-1');$('settingsTitle').focus({preventScroll:true});}
+ else $('settingsToggle').focus({preventScroll:true});
+ window.scrollTo({top:0,behavior:'instant'});
+}
+$('settingsSheetId').addEventListener('change',normalizeSheetInput);
+$('settingsGid').addEventListener('input',currentSheetFields);
+$('settingsForm').addEventListener('submit',function(e){
+ e.preventDefault();normalizeSheetInput();
+ const spreadsheetId=$('settingsSheetId').value.trim();
+ const gid=$('settingsGid').value.trim();
+ if(!/^[\w-]{25,100}$/.test(spreadsheetId)||!/^\d{1,12}$/.test(gid)){setSettingsFeedback(settingsText('missing'),false);return;}
+ if(preview){setSettingsFeedback(settingsText('preview'),false);return;}
+ const button=$('settingsSaveButton');button.disabled=true;
+ setSettingsFeedback(settingsText('saving'),true);
+ google.script.run.withSuccessHandler(res=>{
+   button.disabled=false;
+   if(res&&res.ok){$('settingsSheetId').value=res.spreadsheetId;$('settingsGid').value=String(res.gid);currentSheetFields();setSettingsFeedback(settingsText('saved'),true);}
+   else setSettingsFeedback(settingsText('authFail')+(res?.error||''),false);
+ }).withFailureHandler(err=>{
+   button.disabled=false;
+   setSettingsFeedback(settingsText('authFail')+(err?.message||String(err)),false);
+ }).updateSpreadsheetSettings({spreadsheetId,gid:Number(gid)});
+});
+
+// İlk yüklemede ve tarayıcı geçmişinden geri dönülürken varsayılan DZ seçimi.
+setLang(DEFAULT_INTERFACE_LANG);
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) setLang(DEFAULT_INTERFACE_LANG);
+});
+</script>
+</body>
+</html>
